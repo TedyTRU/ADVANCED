@@ -12,24 +12,18 @@ public class L08_AcademyGraduation {
 
         while (n-- > 0) {
             String name = scanner.nextLine();
-            double[] grades = Arrays.stream(scanner.nextLine().split("\\s+")).mapToDouble(Double::parseDouble).toArray();
+            double[] grades = Arrays.stream(scanner.nextLine().split("\\s+"))
+                    .mapToDouble(Double::parseDouble).toArray();
 
             students.put(name, grades);
 
         }
 
-//        DecimalFormat df = new DecimalFormat("0.#################");
-//        students.forEach((k, v) -> {
-//            System.out.printf("%s is graduated with ", k);
-//            System.out.print(df.format(Arrays.stream(v).average().orElse(0)));
-//            System.out.println();
-//
-//        });
+        DecimalFormat df = new DecimalFormat("##.############################");
 
         students.forEach((k, v) -> {
-            System.out.printf("%s is graduated with %f%n", k,
-                    Arrays.stream(v).average().orElse(0));
-
+            System.out.printf("%s is graduated with %s%n", k,
+                    df.format(Arrays.stream(v).average().orElse(0)));
         });
 
     }
