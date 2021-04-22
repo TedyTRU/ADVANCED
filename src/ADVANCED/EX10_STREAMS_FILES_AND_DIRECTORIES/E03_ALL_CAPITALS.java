@@ -2,7 +2,7 @@ package ADVANCED.EX10_STREAMS_FILES_AND_DIRECTORIES;
 
 import java.io.*;
 
-public class E063_ALL_CAPITALS {
+public class E03_ALL_CAPITALS {
     private static final String INPUT_PATH = "src/ADVANCED/EX10_STREAMS_FILES_AND_DIRECTORIES/Resources/input.txt";
     private static final String OUTPUT_PATH = "src/ADVANCED/EX10_STREAMS_FILES_AND_DIRECTORIES/Resources/output.txt";
 

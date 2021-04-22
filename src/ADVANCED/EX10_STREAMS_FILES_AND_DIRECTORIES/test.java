@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 public class test {
     public static void main(String[] args) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        reader.readLine();
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        reader.readLine();
+
+        System.out.println(System.getProperty("java.version"));
 
     }
 }
