@@ -1,6 +1,7 @@
 package ADVANCED.EX14_DEFINING_CLASSES.E02_CompanyRoster;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Department {
@@ -14,6 +15,11 @@ public class Department {
 
     public void addEmployee(Employee employee) {
         this.employeeList.add(employee);
+    }
+
+    public List<Employee> getEmployeeList() {
+        //return this.employeeList;
+        return Collections.unmodifiableList(this.employeeList);
     }
 
     public double getAverageSalary() {

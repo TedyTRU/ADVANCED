@@ -1,5 +1,6 @@
 package ADVANCED.EX14_DEFINING_CLASSES.E02_CompanyRoster;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Main {
@@ -7,7 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int n = Integer.parseInt(scanner.nextLine());
-        List<Employee> employees = new ArrayList<>();
+        //List<Employee> employees = new ArrayList<>();
         Map<String, Department> departments = new HashMap<>();
 
         while (n-- > 0) {
@@ -35,18 +36,35 @@ public class Main {
                     int age = Integer.parseInt(tokens[4]);
                     employee = new Employee(name, salary, position, department, age);
                 } else {
-                    String emial = tokens[4];
-                    employee = new Employee(name, salary, position, department, emial);
+                    String email = tokens[4];
+                    employee = new Employee(name, salary, position, department, email);
                 }
-
-
             }
-            employees.add(employee);
+            //employees.add(employee);
             departments.get(department).addEmployee(employee);
-
         }
 
+        double bestAvgSalary = Integer.MIN_VALUE;
+        String bestDepartment = "";
 
+        for (Map.Entry<String, Department> entry : departments.entrySet()) {
+
+            if (entry.getValue().getAverageSalary() > bestAvgSalary) {
+                bestAvgSalary = entry.getValue().getAverageSalary();
+                bestDepartment = entry.getKey();
+            }
+        }
+
+        Department department = departments.get(bestDepartment);
+        System.out.printf("Highest Average Salary: %s%n", bestDepartment);
+
+        department.getEmployeeList().stream()
+                .sorted((e1, e2) -> Double.compare(e2.getSalary(), e1.getSalary()))
+                .forEach(employee -> System.out.println(employee));
+
+//        for (Employee employee : department.getEmployeeList()) {
+//            System.out.println(employee);
+//        }
 
     }
 }
