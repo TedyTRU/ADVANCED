@@ -1,19 +1,18 @@
 package ADVANCED.EX14_DEFINING_CLASSES.E05_CarSalesman;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         int n = Integer.parseInt(scanner.nextLine());
-        List<Engine> engines = new ArrayList<>();
+        //List<Engine> engines = new ArrayList<>();
+        Map<String, Engine> engineMap = new HashMap<>();
 
         while (n-- > 0) {
             Engine engine = null;
-            String[] tokens = scanner.nextLine().split("");
+            String[] tokens = scanner.nextLine().split("\\s+");
             String model = tokens[0];
             int power = Integer.parseInt(tokens[1]);
 
@@ -35,18 +34,20 @@ public class Main {
                     engine = new Engine(model, power, efficiency);
                 }
             }
-            engines.add(engine);
+            //engines.add(engine);
+            engineMap.putIfAbsent(model, engine);
         }
 
 
         int m = Integer.parseInt(scanner.nextLine());
-        List<Car> cars = new ArrayList<>();
+        List<Car> cars = new LinkedList<>();
 
         while (m-- > 0) {
             Car car = null;
             String[] tokens = scanner.nextLine().split("\\s+");
             String model = tokens[0];
-            String engineModel = tokens[1];
+            //String engineModel = tokens[1];
+            Engine engineModel = engineMap.get(tokens[1]);
 
             if (tokens.length == 2) {
                 car = new Car(model, engineModel);
@@ -68,9 +69,6 @@ public class Main {
             cars.add(car);
         }
 
-       // TO DO
-
-
-
+        cars.forEach(car -> System.out.println(car));
     }
 }
