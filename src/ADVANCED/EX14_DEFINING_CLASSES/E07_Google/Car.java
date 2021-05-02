@@ -5,7 +5,7 @@ public class Car {
     private String model;
     private int speed;
 
-    public Car() {}
+//    public Car() {}
 
     public Car(String model, int speed) {
         this.model = model;

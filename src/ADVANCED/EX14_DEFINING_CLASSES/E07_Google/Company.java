@@ -6,8 +6,8 @@ public class Company {
     private String department;
     private double salary;
 
-    public Company() {
-    }
+//    public Company() {
+//    }
 
     public Company(String name, String department, double salary) {
         this.name = name;

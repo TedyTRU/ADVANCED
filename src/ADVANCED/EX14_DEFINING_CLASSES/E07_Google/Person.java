@@ -14,11 +14,11 @@ public class Person {
 
     public Person(String name) {
         this.name = name;
-        this.company = new Company();
+        //this.company = new Company();
         this.pokemonList = new ArrayList<>();
         this.parents = new ArrayList<>();
         this.children = new ArrayList<>();
-        this.car = new Car();
+        //this.car = new Car();
     }
 
     public void addCompany(Company company) {
@@ -60,7 +60,9 @@ public class Person {
             System.out.println(this.company.format());
         }
         System.out.println("Car:");
-        System.out.println(this.car == null ? "car is empty" : this.car.format());
+        if (this.car != null) {
+            System.out.println(this.car.format());
+        }
         System.out.println("Pokemon:");
         if (!this.pokemonList.isEmpty()) {
             getPokemonList().forEach(pokemon ->
