@@ -1,7 +1,5 @@
 package ADVANCED.EX20_ITERATORS_AND_COMPARATORS.E04_Froggy;
 
-import ADVANCED.EX20_ITERATORS_AND_COMPARATORS.Lake;
-
 import java.util.*;
 
 public class Main {
@@ -10,7 +8,7 @@ public class Main {
 
         int[] stones = Arrays.stream(sc.nextLine().split(",\\s+"))
                 .mapToInt(Integer::parseInt).toArray();
-        
+
         Lake lake = new Lake(stones);
 
         Iterator<Integer> froggy = lake.iterator();

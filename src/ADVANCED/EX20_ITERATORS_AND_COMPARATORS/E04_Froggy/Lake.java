@@ -1,4 +1,4 @@
-package ADVANCED.EX20_ITERATORS_AND_COMPARATORS;
+package ADVANCED.EX20_ITERATORS_AND_COMPARATORS.E04_Froggy;
 
 import java.util.Iterator;
 
