@@ -9,40 +9,42 @@ public class L07_MathPotato {
 
         String[] children = scanner.nextLine().split("\\s+");
         int n = Integer.parseInt(scanner.nextLine());
-
-        ArrayDeque<String> queue = new ArrayDeque<>();
+        ArrayDeque<String> hotPotato = new ArrayDeque<>();
 
         for (String child : children) {
-            queue.offer(child);
+            hotPotato.offer(child);
         }
 
-        int cycle = 1;
-        while (queue.size() > 1) {
-            for (int i = 1; i < n; i++)
-                queue.offer(queue.poll());
-
-            if (isPrime(cycle))
-                System.out.println("Prime " + queue.peek());
-            else
-                System.out.println("Removed " + queue.poll());
+        int cycle = 0;
+        while (hotPotato.size() > 1) {
 
             cycle++;
+            for (int i = 1; i < n; i++) {
+
+                hotPotato.offer(hotPotato.poll());
+            }
+            if (isComposite(cycle)) {
+                System.out.println("Removed " + hotPotato.poll());
+
+            } else {
+                System.out.println("Prime " + hotPotato.peek());
+            }
+
         }
 
-        System.out.println("Last is " + queue.poll());
+        System.out.println("Last is " + hotPotato.peek());
     }
 
+    private static boolean isComposite(int n) {
 
-    private static boolean isPrime(int num) {
-        int count = 0;
-        for (int i = 2; i <= num; i++) {
-            if (num % i == 0) {
-                count++;
-            }
-            if (count > 1) {
-                return false;
-            }
+        if (n == 1) {
+            return true;
         }
-        return true;
+
+        if ((n % 2 == 0 || n % 3 == 0 || n % 5 == 0) && n != 2 && n != 3 && n != 5) {
+            return true;
+
+        }
+        return false;
     }
 }
