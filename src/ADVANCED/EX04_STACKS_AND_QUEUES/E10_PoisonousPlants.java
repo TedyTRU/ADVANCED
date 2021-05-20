@@ -1,43 +1,50 @@
 package ADVANCED.EX04_STACKS_AND_QUEUES;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 
 public class E10_PoisonousPlants {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(scanner.nextLine());
-        //ArrayDeque<Integer> plants = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toCollection(ArrayDeque::new));
-        List<Integer> initialPlants = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
-        ArrayDeque<Integer> StackOfIndexes = new ArrayDeque<>();
-        int days = 0;
+        int n = Integer.parseInt(buffer.readLine());
+        String[] plants = buffer.readLine().split("\\s+");
+        ArrayDeque<Integer> indexes = new ArrayDeque<>();
+        indexes.push(0);
 
-        while (true) {
-            days++;
-            boolean deadPlants = false;
+        int[] days = new int[n];
 
-            for (int i = 0; i < n - 1; i++) {
-                if (initialPlants.get(i + 1) > initialPlants.get(i)) {
-                    StackOfIndexes.push(i + 1);
-                    deadPlants = true;
-                }
-            }
+        for (int i = 0; i < n; i++) {
 
-            int deadPlantsCount = StackOfIndexes.size();
-            for (int i = 0; i < deadPlantsCount; i++) {
-                int index = StackOfIndexes.pop();
-                initialPlants.remove(index);
+            int maxDays = 0;
+
+            while (indexes.size() > 0
+                    && Integer.parseInt(plants[indexes.peek()]) >= Integer.parseInt(plants[i])) {
+
+                maxDays = Math.max(maxDays, days[indexes.pop()]);
 
             }
 
-            n = initialPlants.size();
-
-            if (!deadPlants) {
-                System.out.println(days - 1);
-                return;
+            if (indexes.size() > 0) {
+                days[i] = maxDays + 1;
             }
+
+            indexes.push(i);
         }
 
+        System.out.println(max(days));
+
+    }
+
+    private static int max(int[] days) {
+        int max = Integer.MIN_VALUE;
+        for (int day : days) {
+            if (day > max) {
+                max = day;
+            }
+        }
+        return max;
     }
 }
