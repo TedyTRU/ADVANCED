@@ -14,7 +14,10 @@ public class E02_MatrixOfPalindromes_2 {
         fillMatrix(matrix);
 
         //printMatrix(matrix);
-        Arrays.stream(matrix).forEach(System.out::println);
+        Arrays.stream(matrix).forEach(arr -> {
+            Arrays.stream(arr).forEach(e -> System.out.print(e + " "));
+            System.out.println();
+        });
 
     }
 
