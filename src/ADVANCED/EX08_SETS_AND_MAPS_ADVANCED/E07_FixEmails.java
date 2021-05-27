@@ -15,6 +15,7 @@ public class E07_FixEmails {
             emails.putIfAbsent(name, "");
             String email = scanner.nextLine();
 
+            //String check = email.substring(email.lastIndexOf('.') + 1).toLowerCase();
             if (email.endsWith("us") || email.endsWith("uk") || email.endsWith("com")) {
                 emails.remove(name);
             } else {
