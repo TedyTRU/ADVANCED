@@ -15,6 +15,11 @@ public class E01_SumLines {
 
             while (line != null) {
                 int sum = 0;
+
+//                 for (char symbol : line.toCharArray()) {
+//                    sum += symbol;
+//                }
+
                 for (int i = 0; i < line.length(); i++) {
                     sum += line.charAt(i);
                 }
