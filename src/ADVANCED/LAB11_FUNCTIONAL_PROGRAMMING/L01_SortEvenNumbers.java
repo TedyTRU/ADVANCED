@@ -1,31 +1,24 @@
 package ADVANCED.LAB11_FUNCTIONAL_PROGRAMMING;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class L01_SortEvenNumbers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] numbers = Arrays.stream(scanner.nextLine().split(", "))
-                .mapToInt(Integer::parseInt)
-                .filter(Math::isEven)   // .filter(n -> isEven(n))
-                .toArray();
+        List<Integer> numbers = Arrays.stream(scanner.nextLine().split(", "))
+                .map(Integer::parseInt).collect(Collectors.toList());
 
-        System.out.println(formatArray(numbers));
+        numbers.removeIf(number -> number % 2 != 0);
 
-        Arrays.sort(numbers);
+        System.out.println(numbers.stream().map(String::valueOf).collect(Collectors.joining(", ")));
 
-        System.out.println(formatArray(numbers));
+        numbers.sort(Integer::compareTo);
+
+        System.out.println(numbers.stream().map(String::valueOf).collect(Collectors.joining(", ")));
 
     }
-
-    public static String formatArray(int[] arr) {
-        return Arrays.stream(arr)
-                .mapToObj(String::valueOf)
-                .collect(Collectors.joining(", "));
-    }
-
 }
