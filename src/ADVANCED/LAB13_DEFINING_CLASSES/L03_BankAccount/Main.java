@@ -3,46 +3,48 @@ package ADVANCED.LAB13_DEFINING_CLASSES.L03_BankAccount;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine();
-        Map<Integer, BankAccount> vault = new HashMap<>();
+        String line = scanner.nextLine();
+        Map<Integer, BankAccount> accountsMap = new HashMap<>();
 
-        while (!input.equals("End")) {
-            String[] tokens = input.split("\\s+");
+        String output = null;
 
-            String output;
+        while (!"End".equals(line)) {
 
-            switch (tokens[0]) {
+            if (line.equals("Create")) {
+                BankAccount bankAccount = new BankAccount();
+                accountsMap.put(bankAccount.getId(), bankAccount);
+                output = String.format("Account ID%d created", bankAccount.getId());
 
-                case "Deposit":
-                    int id = Integer.parseInt(tokens[1]);
-                    int amount = Integer.parseInt(tokens[2]);
-                    vault.get(id).deposit(amount);
-                    output = "Deposited " + amount + " to ID" + id;
-                    break;
+            } else if (line.contains("Deposit")) {
+                int id = Integer.parseInt(line.split("\\s+")[1]);
+                int amount = Integer.parseInt(line.split("\\s+")[2]);
+                BankAccount bankAccount = accountsMap.get(id);
+                output = executeIfNotNull(bankAccount, b -> {
+                    b.deposit(amount);
+                    return String.format("Deposited %d to ID%d", amount, id);
+                });
 
-                case "GetInterest":
-                    id = Integer.parseInt(tokens[1]);
-                    int years = Integer.parseInt(tokens[2]);
-                    double interest = vault.get(id).getInterest(years);
-                    output = String.format("%.2f", interest);
-                    break;
+            } else if (line.contains("SetInterest")) {
+                double interest = Double.parseDouble(line.split("\\s+")[1]);
+                BankAccount.setInterestRate(interest);
+                output = null;
 
-                case "SetInterest":
-                    double newInterest = Double.parseDouble(tokens[2]);
-                    BankAccount.setInterestRate(newInterest);
-                    output = null;
-                    break;
+            } else if (line.contains("GetInterest")) {
+                int id = Integer.parseInt(line.split("\\s+")[1]);
+                int years = Integer.parseInt(line.split("\\s+")[2]);
 
-                default:
-                    BankAccount bankAccount = new BankAccount();
-                    vault.put(bankAccount.getId(), bankAccount);
-                    output = "Account ID " + bankAccount.getId() + "created";
-                    break;
+                BankAccount bankAccount = accountsMap.get(id);
+
+                output = executeIfNotNull(bankAccount, b -> {
+                    double interest = b.getInterest(years);
+                    return String.format("%.2f", interest);
+                });
 
             }
 
@@ -50,8 +52,17 @@ public class Main {
                 System.out.println(output);
             }
 
-            input = scanner.nextLine();
+            line = scanner.nextLine();
         }
 
+    }
+
+    public static String executeIfNotNull(BankAccount account,
+                                          Function<BankAccount, String> function) {
+
+        if (account == null) {
+            return "Account does not exist";
+        }
+        return function.apply(account);
     }
 }

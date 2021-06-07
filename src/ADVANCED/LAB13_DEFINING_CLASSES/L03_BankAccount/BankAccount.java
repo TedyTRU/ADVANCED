@@ -2,15 +2,15 @@ package ADVANCED.LAB13_DEFINING_CLASSES.L03_BankAccount;
 
 public class BankAccount {
 
-    private static int accountCount = 1;
-    private static double interestRate = 0.02;
-
+    private final static double DEFAULT_INTEREST_RATE = 0.02;
+    private static double interestRate = DEFAULT_INTEREST_RATE;
+    private static int bankAccountCount = 1;
     private int id;
-    private double balance;
+    private int balance;
 
     public BankAccount() {
-        this.id = accountCount;
-        accountCount++;
+        this.id = bankAccountCount;
+        bankAccountCount++;
     }
 
     public int getId() {
@@ -21,11 +21,11 @@ public class BankAccount {
         BankAccount.interestRate = interestRate;
     }
 
-    public double getInterest(int years) {
-        return this.balance * interestRate * years;
+    double getInterest(int years) {
+        return BankAccount.interestRate * years * this.balance;
     }
 
-    public void deposit(double amount) {
+    void deposit(double amount) {
         this.balance += amount;
     }
 
