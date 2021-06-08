@@ -23,7 +23,7 @@ public class Main {
 
         people.stream()
                 .filter(p -> p.getAge() > 30)
-                .sorted((p1, p2) -> p1.getName().compareTo(p2.getName()))
+                .sorted(Comparator.comparing(p -> p.getName()))    //.sorted((p1, p2) -> p1.getName().compareTo(p2.getName()))
                 .forEach(person -> System.out.printf("%s - %d%n", person.getName(), person.getAge()));
 
     }
