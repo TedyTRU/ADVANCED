@@ -10,17 +10,8 @@ public class Main {
         Map<String, Trainer> trainers = new LinkedHashMap<>();
 
         while (!lines.equals("Tournament")) {
-            String[] tokens = lines.split("\\s+");
-            String nameOfTrainer = tokens[0];
-            String nameOfPokemon = tokens[1];
-            String element = tokens[2];
-            int health = Integer.parseInt(tokens[3]);
 
-            Pokemon pokemon = new Pokemon(nameOfPokemon, element, health);
-            trainers.putIfAbsent(nameOfTrainer, new Trainer());
-            trainers.get(nameOfTrainer).addPokemon(pokemon);
-
-            lines = scanner.nextLine();
+            lines = filTrainers(scanner, lines, trainers);
         }
 
         String command = scanner.nextLine();
@@ -52,5 +43,20 @@ public class Main {
                                 trainer.getValue().size()));
 
 
+    }
+
+    private static String filTrainers(Scanner scanner, String lines, Map<String, Trainer> trainers) {
+        String[] tokens = lines.split("\\s+");
+        String nameOfTrainer = tokens[0];
+        String nameOfPokemon = tokens[1];
+        String element = tokens[2];
+        int health = Integer.parseInt(tokens[3]);
+
+        Pokemon pokemon = new Pokemon(nameOfPokemon, element, health);
+        trainers.putIfAbsent(nameOfTrainer, new Trainer());
+        trainers.get(nameOfTrainer).addPokemon(pokemon);
+
+        lines = scanner.nextLine();
+        return lines;
     }
 }
