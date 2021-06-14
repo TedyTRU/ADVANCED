@@ -13,6 +13,7 @@ public class E02_BookWorm {
         Scanner scanner = new Scanner(System.in);
 
         StringBuilder initialString = new StringBuilder(scanner.nextLine());
+        letters.append(initialString);
 
         char[][] matrix = fillMatrix(scanner);
         playerRow = playerPosition(matrix)[0];
@@ -40,7 +41,7 @@ public class E02_BookWorm {
             command = scanner.nextLine();
         }
 
-        System.out.println(initialString.append(letters));
+        System.out.println(letters);
         printMatrix(matrix);
 
     }
@@ -68,6 +69,7 @@ public class E02_BookWorm {
         } else {
             if (!letters.toString().isEmpty()) {
                 letters.deleteCharAt(letters.length() - 1);
+                col--;
             }
         }
         playerRow = row;
@@ -92,6 +94,7 @@ public class E02_BookWorm {
         } else {
             if (!letters.toString().isEmpty()) {
                 letters.deleteCharAt(letters.length() - 1);
+                col++;
             }
         }
         playerRow = row;
@@ -113,6 +116,7 @@ public class E02_BookWorm {
         } else {
             if (!letters.toString().isEmpty()) {
                 letters.deleteCharAt(letters.length() - 1);
+                row--;
             }
         }
         playerRow = row;
@@ -134,6 +138,7 @@ public class E02_BookWorm {
         } else {
             if (!letters.toString().isEmpty()) {
                 letters.deleteCharAt(letters.length() - 1);
+                row++;
             }
         }
         playerRow = row;
