@@ -2,6 +2,7 @@ package ADVANCED.EX18_GENERICS.E07_CustomList;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class CustomList<T extends Comparable<T>> {
@@ -44,6 +45,7 @@ public class CustomList<T extends Comparable<T>> {
             }
         }
         return maxEl;
+        //return this.data.stream().max(Comparator.naturalOrder()).orElse(null);
     }
 
     public T getMin() {
@@ -54,6 +56,7 @@ public class CustomList<T extends Comparable<T>> {
             }
         }
         return minEl;
+        //return this.data.stream().min(Comparator.naturalOrder()).orElse(null);
     }
 
     public void print() {
