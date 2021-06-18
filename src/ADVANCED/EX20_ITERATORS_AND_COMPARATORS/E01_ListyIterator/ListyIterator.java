@@ -9,10 +9,15 @@ public class ListyIterator {
 
     public ListyIterator(List<String> data) {
         this.data = data;
+        if (this.data.size() != 0) {
+            this.index = 0;
+        } else {
+            this.index = -1;
+        }
     }
 
     public boolean move() {
-        if(hasNext()) {
+        if (hasNext()) {
             index++;
             return true;
         }
