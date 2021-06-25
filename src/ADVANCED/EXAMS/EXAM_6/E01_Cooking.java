@@ -47,7 +47,7 @@ public class E01_Cooking {
         if (bread > 0 && cake > 0 && pastry > 0 && fruitPie > 0) {
             System.out.println("Wohoo! You succeeded in cooking all the food!");
         } else {
-            System.out.println("Ugh, what a pity! You didn't have enough materials to cook everything.");
+            System.out.println("Ugh, what a pity! You didn't have enough materials to to cook everything.");
         }
 
         if (liquids.isEmpty()) {
