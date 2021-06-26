@@ -14,8 +14,6 @@ public class E02_Bomb {
         int n = Integer.parseInt(scanner.nextLine());
         String[] commands = scanner.nextLine().split(",");
         char[][] matrix = fillMatrix(scanner, n);
-        getPosition(matrix, 's');
-        matrix[row][col] = '+';
         boolean getEnd = false;
 
         for (String command : commands) {
@@ -23,23 +21,23 @@ public class E02_Bomb {
                 case "up":
                     if (row - 1 >= 0) {
                         row--;
-                        break;
                     }
+                    break;
                 case "down":
                     if (row + 1 < matrix.length) {
                         row++;
-                        break;
                     }
+                    break;
                 case "left":
                     if (col - 1 >= 0) {
                         col--;
-                        break;
                     }
+                    break;
                 case "right":
                     if (col + 1 < matrix[row].length) {
                         col++;
-                        break;
                     }
+                    break;
             }
 
             if (matrix[row][col] == 'B') {
@@ -78,22 +76,15 @@ public class E02_Bomb {
         return count;
     }
 
-    private static void getPosition(char[][] matrix, char toFind) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == toFind) {
-                    row = i;
-                    col = j;
-                }
-            }
-        }
-    }
-
     private static char[][] fillMatrix(Scanner scanner, int n) {
         char[][] matrix = new char[n][n];
         for (int i = 0; i < n; i++) {
-            matrix[i] = scanner.nextLine()
-                    .replaceAll("\\s+", "").toCharArray();
+            String input = scanner.nextLine().replaceAll("\\s+", "");
+            matrix[i] = input.toCharArray();
+            if (input.contains("s")) {
+                row = i;
+                col = input.indexOf('s');
+            }
         }
         return matrix;
     }
